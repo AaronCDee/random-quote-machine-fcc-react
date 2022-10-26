@@ -40,7 +40,6 @@ class App extends React.Component{
     this.generateQuote = this.generateQuote.bind(this);
   }
 
-
   async componentDidMount(){
     let quotesRequest = await fetch(quotesUri);
     let quotesData = await quotesRequest.json();
@@ -50,7 +49,7 @@ class App extends React.Component{
       quotes: quotes,
       quotesArrived: true,
     });
-    this.generateQuote();
+    setTimeout(this.generateQuote(), 500);
   }
   generateQuote(){
     console.log(this.state.quotes);
