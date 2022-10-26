@@ -39,6 +39,19 @@ class App extends React.Component{
     };
     this.generateQuote = this.generateQuote.bind(this);
   }
+
+
+  async componentDidMount(){
+    let quotesRequest = await fetch(quotesUri);
+    let quotesData = await quotesRequest.json();
+    let quotes = quotesData.quotes;
+    console.log(quotes);
+    this.setState({
+      quotes: quotes,
+      quotesArrived: true,
+    });
+    this.generateQuote();
+  }
   generateQuote(){
     console.log(this.state.quotes);
     this.setState({
@@ -57,19 +70,6 @@ class App extends React.Component{
       })}, 500);
       
   }
-
-  async componentDidMount(){
-    let quotesRequest = await fetch(quotesUri);
-    let quotesData = await quotesRequest.json();
-    let quotes = quotesData.quotes;
-    console.log(quotes);
-    this.setState({
-      quotes: quotes,
-      quotesArrived: true,
-    });
-    this.generateQuote();
-  }
-  
   render(){
     let quoteForTwitter = `${this.state.currentQuote}\n-${this.state.currentAuthor}`
     let twitterHref = `https://twitter.com/intent/tweet?hashtags=RandomQuotes&related=freecodecamp&text=${encodeURIComponent(quoteForTwitter)}`;
