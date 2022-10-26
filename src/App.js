@@ -51,8 +51,7 @@ class App extends React.Component{
     });
     setTimeout(this.generateQuote(), 500);
   }
-  async generateQuote(){
-    await this.componentDidMount();
+  generateQuote(){
     console.log(this.state.quotes);
     this.setState({
       visible: false
