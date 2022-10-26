@@ -49,7 +49,9 @@ class App extends React.Component{
       quotes: quotes,
       quotesArrived: true,
     });
-    this.generateQuote();
+    if(this.state.quotesArrived){
+      this.generateQuote();
+    }
   }
   generateQuote(){
     console.log(this.state.quotes);
