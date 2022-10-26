@@ -49,25 +49,28 @@ class App extends React.Component{
       quotes: quotes,
       quotesArrived: true,
     });
-    setTimeout(this.generateQuote(), 500);
+    this.generateQuote();
   }
   generateQuote(){
     console.log(this.state.quotes);
-    this.setState({
-      visible: false
-    });
-      let randomQuoteInd = Math.floor(Math.random()*this.state.quotes.length);
-      console.log(randomQuoteInd);
-      let currentQuoteData = this.state.quotes[randomQuoteInd];
-      console.log(currentQuoteData);
-      let randomColorInd = Math.floor(Math.random()*randomColor.length);
-      setTimeout(() => {this.setState({
-        visible:true,
-        currentQuote: currentQuoteData.quote,
-        currentAuthor: currentQuoteData.author,
-        currentColor: randomColor[randomColorInd],
-      })}, 500);
-      
+    if(!this.state.quotesArrived){
+      return;
+    }else{
+      this.setState({
+        visible: false
+      });
+        let randomQuoteInd = Math.floor(Math.random()*this.state.quotes.length);
+        console.log(randomQuoteInd);
+        let currentQuoteData = this.state.quotes[randomQuoteInd];
+        console.log(currentQuoteData);
+        let randomColorInd = Math.floor(Math.random()*randomColor.length);
+        setTimeout(() => {this.setState({
+          visible:true,
+          currentQuote: currentQuoteData.quote,
+          currentAuthor: currentQuoteData.author,
+          currentColor: randomColor[randomColorInd],
+        })}, 500);
+    } 
   }
   render(){
     let quoteForTwitter = `${this.state.currentQuote}\n-${this.state.currentAuthor}`
