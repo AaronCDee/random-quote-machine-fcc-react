@@ -48,10 +48,10 @@ class App extends React.Component{
     this.setState({
       quotes: quotes,
       quotesArrived: true,
-    });
-    if(this.state.quotesArrived){
+    },
+    () => {
       this.generateQuote();
-    }
+    });
   }
   generateQuote(){
     console.log(this.state.quotes);
